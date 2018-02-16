@@ -1,0 +1,87 @@
+from __future__ import division # for decimal percision
+import smbus # for I2C connections
+import time 
+import datetime
+import math
+
+# Get date
+today = datetime.date.today()
+#localtime = datetime.datetime.now()
+
+# Get I2C bus
+bus = smbus.SMBus(1)
+
+# ISL29125 address, 0x44(68)
+# Select configuation-1register, 0x01(01)
+# 0x0D(13) Operation: RGB, Range: 10000 lux, Res: 16 Bits
+bus.write_byte_data(0x44, 0x01, 0x0D)
+
+#ENTER FILE NAME
+f = open('krauss_algae_water_high', 'w')
+sumBlue, sumGreen, sumRed = 0, 0, 0
+
+f.write("%s \n\n" %today)
+#f.write("%s \n\n" %localtime)
+
+# ISL29125 address, 0x44(68)
+# Read data back from 0x09(9), 6 bytes
+# Green LSB, Green MSB, Red LSB, Red MSB, Blue LSB, Blue MSB 
+for i in range(0, 10): # takes 10 data samples
+	data = bus.read_i2c_block_data(0x44, 0x09, 6)
+
+	# Convert the data
+	green = data[1] * 256 + data[0]
+	red   = data[3] * 256 + data[2]
+	be  = data[5] * 256 + data[4]
+	
+	# light source exceeds 256 lux 
+	# we want to kept the output as 8 bits so we will
+	# LSR how ever many bits the input exceeds 8 bits 
+	# (i.e) if input is 10 bits we will shift right 2 bits 
+	if (green > 256 or red > 256 or blue > 256):
+		for 
+	
+	sumBlue  = sumBlue + blue
+	sumGreen = sumGreen + green
+	sumRed   = sumRed + red
+
+        f.write("Blue: %d lux \n" %blue)
+	f.write("Green: %d lux \n" %green)
+	f.write("Red: %d lux \n" %red)
+	
+	#DEBUG
+	print "\n"	
+	print "blue sum: %d \n" %sumBlue
+	print "green sum: %d \n" %sumGreen
+	print "red sum: %d \n" %sumRed
+	print "\n"
+
+	# Output data to the screen
+        print "Blue: %d lux \n" %blue
+	print "Green: %d lux \n" %green
+	print "Red: %d lux \n" %red
+
+	time.sleep(1) # 1 sec delay
+
+#DEBUG
+print "blue sum: %d \n" %sumBlue
+print "green sum: %d \n" %sumGreen
+print "red sum: %d \n" %sumRed
+
+# average calculation
+avgBlue  = sumBlue / (i+1)
+avgGreen = sumGreen / (i+1)
+avgRed   = sumRed / (i+1)
+
+#DEBUG
+print "blue avg: %.2f \n" %avgBlue
+print "green avg: %.2f \n" %avgGreen
+print "red avg: %.2f \n" %avgRed
+
+f.write("\n")
+f.write("avgBlue: %.2f lux \n" %avgBlue)
+f.write("avgGreen: %.2f lux \n" %avgGreen)
+f.write("avgRed: %.2f lux \n" %avgRed)
+	
+	
+f.close()
