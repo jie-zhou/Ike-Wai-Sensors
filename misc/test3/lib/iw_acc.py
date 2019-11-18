@@ -112,4 +112,4 @@ def get_acc():
 	# print "Magnetic field in Y-Axis : %d" %yMag
 	# print "Magnetic field in Z-Axis : %d" %zMag
 
-	return [xAccl, yAccl, zAccl, xMag, yMag, zMag]
+	return [xAccl, yAccl, zAccl]

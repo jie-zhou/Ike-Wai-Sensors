@@ -1,3 +1,9 @@
+# Distributed with a free-will license.
+# Use it any way you want, profit or free, provided it fits in the licenses of its associated works.
+# MCP9808
+# This code is designed to work with the MCP9808_I2CS I2C Mini Module available from ControlEverything.com.
+# https://www.controleverything.com/content/Temperature?sku=MCP9808_I2CS#tabs-0-product_tabset-2
+
 import smbus
 import time
 
@@ -34,4 +40,4 @@ def get_hot():
 	# print "Temperature in Celsius is    : %.2f C" %ctemp
 	# print "Temperature in Fahrenheit is : %.2f F" %ftemp
 
-	return [float('%.3f'%ctemp), float('%.3f'%ftemp)]
+	return [ctemp, ftemp]

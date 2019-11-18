@@ -1,31 +1,20 @@
 from __future__ import division
-import time
 import RPi.GPIO as GPIO
+import time
+import Adafruit_LSM303
+import Adafruit_MCP9808.MCP9808 as MCP9808
 import smbus
+import datetime
 import math
-
-
-led_pin = 17
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(led_pin, GPIO.OUT)
-
-
-def turn_led_on():
-    GPIO.output(led_pin, GPIO.HIGH)
-
-
-def turn_led_off():
-    GPIO.output(led_pin, GPIO.LOW)
-
+import json
+import Adafruit_ADS1x15
 
 # I2C stuff
 bus = smbus.SMBus(1)
 
-
-def get_rgb():
-    for i in range(0,1):
+for i in range(0,1):
+        #turn UV LED on?
+        time.sleep(1)
 
         bus.write_byte_data(0x44, 0x01, 0x0D)
         data = bus.read_i2c_block_data(0x44, 0x09, 6)
@@ -49,9 +38,7 @@ def get_rgb():
                 red   = int(red   / math.pow(2,exceed_bits))
                 blue  = int(blue  / math.pow(2,exceed_bits))
 
-        #Pprint RGB values.
-        # print "green: %.2f" %green
-        # print "red: %.2f" %red
-        # print "blue: %.2f" %blue
-
-        return [red,green,blue]
+        # print RGB values - comment out later
+        print "green: %.2f" %green
+        print "red: %.2f" %red
+        print "blue: %.2f" %blue

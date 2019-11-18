@@ -55,3 +55,5 @@ def get_rgb():
         # print "blue: %.2f" %blue
 
         return [red,green,blue]
+
+        time.sleep(1)
