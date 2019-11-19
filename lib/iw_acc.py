@@ -21,7 +21,7 @@ def get_acc():
 	#		0x00(00)	Continuos update, Full scale selection = +/-2g,
 	bus.write_byte_data(0x19, 0x23, 0x00)
 
-	time.sleep(0.5)
+	time.sleep(3)
 
 	# LSM303DLHC Accl address, 0x19(25)
 	# Read data back from 0x28(40), 2 bytes
@@ -69,7 +69,7 @@ def get_acc():
 	#		0x20(32)	Gain setting = +/- 1.3g
 	bus.write_byte_data(0x1E, 0x01, 0x20)
 
-	time.sleep(0.5)
+	time.sleep(3)
 
 	# LSM303DLHC Mag address, 0x1E(30)
 	# Read data back from 0x03(03), 2 bytes

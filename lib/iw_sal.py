@@ -6,8 +6,8 @@ import time       # used for sleep delay and timestamps
 import string     # helps parse strings
 
 class AtlasI2C:
-    long_timeout = 1.5         	# the timeout needed to query readings and calibrations
-    short_timeout = .5         	# timeout for regular commands
+    long_timeout = 5         	# the timeout needed to query readings and calibrations
+    short_timeout = 3         	# timeout for regular commands
     default_bus = 1         	# the default bus for I2C on the newer Raspberry Pis, certain older boards use bus 0
     default_address = 100     	# the default address for the sensor
     current_addr = default_address

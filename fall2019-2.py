@@ -194,13 +194,13 @@ def average_list(list_):
 read_array = [read_rgb, read_acc, read_hot, read_sal]
 
 # Time between samples (in seconds)
-sleep_between_trials = 4
+sleep_between_trials = 5
 # steps_for_foot = 125 #demo
 
 if __name__ == "__main__":
 
     # variable to control number of samples to be taken
-    num_samples = 3	
+    num_samples = 10	
 
     # save path for sensor data
     save_path = '/home/pi/IkeWai/data/dict_' + create_datestamp() + '/' + create_timestamp()

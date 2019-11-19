@@ -16,7 +16,7 @@ def get_hot():
 	#		0x03(03)	Resolution = +0.0625 / C
 	bus.write_byte_data(0x18, 0x08, 0x03)
 
-	time.sleep(0.5)
+	time.sleep(3)
 
 	# MCP9808 address, 0x18(24)
 	# Read data back from 0x05(5), 2 bytes
@@ -35,3 +35,4 @@ def get_hot():
 	# print "Temperature in Fahrenheit is : %.2f F" %ftemp
 
 	return [float('%.3f'%ctemp), float('%.3f'%ftemp)]
+
