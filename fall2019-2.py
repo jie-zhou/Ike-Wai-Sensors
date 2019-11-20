@@ -18,6 +18,12 @@ import lib.iw_hot
 import lib.iw_rgb
 import lib.iw_sal
 
+# Change per well
+well_num = 9
+sleep_between_trials = 5
+num_samples = 3
+
+
 # For sending readings to database
 
 import requests
@@ -42,7 +48,7 @@ def log_iw(message):
     :type message: string
     :return: nothing
     """
-    with open('temp_log.txt', "a") as f:
+    with open('log/' + create_datestamp() + '.txt', "a") as f:
         message_ = create_timestamp() + ': ' + message + '\n'
         f.write(message_.decode('utf-8'))
 
@@ -193,17 +199,12 @@ def average_list(list_):
 
 read_array = [read_rgb, read_acc, read_hot, read_sal]
 
-# Time between samples (in seconds)
-sleep_between_trials = 5
 # steps_for_foot = 125 #demo
 
 if __name__ == "__main__":
 
-    # variable to control number of samples to be taken
-    num_samples = 10	
-
     # save path for sensor data
-    save_path = '/home/pi/IkeWai/data/dict_' + create_datestamp() + '/' + create_timestamp()
+    save_path = '/home/pi/IkeWai/data/dict_' + create_datestamp() + '/well-'+ str(well_num) + '-' + create_timestamp()
 
     # flag to control manual quiting of program
     terminate = False
@@ -365,7 +366,7 @@ if __name__ == "__main__":
         print(json_dump)
         f.write(json.dumps(json_dump, sort_keys=True, indent=4).decode('utf-8'))
 
-    data_path = save_path + '/' + create_timestamp() + '_data.json'
+    data_path = save_path + '/well-' + str(well_num) + '-' + create_timestamp() + '_data.json'
     with open(data_path, "w") as f:
         # Dumping the data from the earlier conversion
         # into the newly created file
